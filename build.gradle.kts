@@ -16,7 +16,7 @@ dependencies {
     implementation(kotlin("stdlib"))
 
     // You can also define the newest bleeding edge version with com.github.doip-sim-ecu:doip-sim-ecu-dsl:main-SNAPSHOT
-    implementation("com.github.doip-sim-ecu:doip-sim-ecu-dsl:0.2.1")
+    implementation("com.github.doip-sim-ecu:doip-sim-ecu-dsl:0.2.3")
 }
 
 tasks {
