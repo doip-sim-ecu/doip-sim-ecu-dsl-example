@@ -117,7 +117,7 @@ fun myCustomGateway(gateway: CreateGatewayFunc) {
         // by using an interceptor. Interceptors run before all request matching and are described below
         request("11 01", "HardReset") {
             ack()
-            addEcuInterceptor("WaitWhileRebooting", 4000.milliseconds) { req ->
+            addOrReplaceEcuInterceptor("WaitWhileRebooting", 4000.milliseconds) { req ->
                 // We could access the request and respond
                 if (req.message[0] == 0xFF.toByte() || // Multiple ways to access the request message
                     this.message[0] == 0xFF.toByte() ||

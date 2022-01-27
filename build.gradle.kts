@@ -15,8 +15,9 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
 
-    // You can also define the newest bleeding edge version with com.github.doip-sim-ecu:doip-sim-ecu-dsl:main-SNAPSHOT
-    implementation("com.github.doip-sim-ecu:doip-sim-ecu-dsl:0.2.3")
+    // You should use the latest released stable version
+    implementation("com.github.doip-sim-ecu:doip-sim-ecu-dsl:0.2.4")
+//    implementation("com.github.doip-sim-ecu:doip-sim-ecu-dsl:main-SNAPSHOT")
 }
 
 tasks {
