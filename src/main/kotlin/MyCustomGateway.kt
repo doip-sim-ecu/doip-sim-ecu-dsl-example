@@ -1,4 +1,4 @@
-import helper.decodeHex
+import library.decodeHex
 import java.net.InetAddress
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
@@ -7,7 +7,7 @@ fun myCustomGateway(gateway: CreateGatewayFunc) {
     gateway("GATEWAY") {
         // The logical address for your gateway
         logicalAddress = 0x1010
-        functionalAddress = 0xcafe
+        functionalAddress = 0xcafe.toShort()
 
         // Optional: Define the network interface the gateway should bind to
         // For multiple gateways, you could run a container with multiple ips, and bind each gateway to one of them
@@ -211,7 +211,7 @@ fun myCustomGateway(gateway: CreateGatewayFunc) {
         // Either by directly adding them
         ecu("ECU1") {
             physicalAddress = 0x1111
-            functionalAddress = 0xcafe
+            functionalAddress = 0xcafe.toShort()
             // Optional - when no request is matched, automatically send out of range nrc (default true)
             nrcOnNoMatch = true
 
@@ -228,7 +228,7 @@ fun myCustomGateway(gateway: CreateGatewayFunc) {
 fun exampleEcu2(ecu: CreateEcuFunc) {
     ecu("EXAMPLEECU2") {
         physicalAddress = 0x2211
-        functionalAddress = 0xcafe
+        functionalAddress = 0xcafe.toShort()
 
         request("10 01") { ack() }
     }
