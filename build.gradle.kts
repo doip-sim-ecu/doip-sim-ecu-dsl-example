@@ -1,5 +1,6 @@
 plugins {
-    kotlin("jvm") // Standalone: Add version
+    val kotlinVersion = "1.6.10"
+    kotlin("jvm") version kotlinVersion
     id("com.github.johnrengelman.shadow") version "7.1.0"
     application
 }
@@ -16,7 +17,7 @@ dependencies {
     implementation(kotlin("stdlib"))
 
     // You should use the latest released stable version
-    implementation("com.github.doip-sim-ecu:doip-sim-ecu-dsl:0.5.0-beta")
+    implementation("com.github.doip-sim-ecu:doip-sim-ecu-dsl:0.8.4")
 //    implementation("com.github.doip-sim-ecu:doip-sim-ecu-dsl:main-SNAPSHOT")
 }
 
