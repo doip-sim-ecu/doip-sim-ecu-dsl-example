@@ -17,7 +17,7 @@ dependencies {
     implementation(kotlin("stdlib"))
 
     // You should use the latest released stable version
-    implementation("com.github.doip-sim-ecu:doip-sim-ecu-dsl:0.8.4")
+    implementation("com.github.doip-sim-ecu:doip-sim-ecu-dsl:0.9.0")
 //    implementation("com.github.doip-sim-ecu:doip-sim-ecu-dsl:main-SNAPSHOT")
 }
 

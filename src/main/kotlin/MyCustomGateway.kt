@@ -1,5 +1,4 @@
 import library.decodeHex
-import java.net.InetAddress
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
@@ -11,7 +10,7 @@ fun myCustomGateway(gateway: CreateGatewayFunc) {
 
         // Optional: Define the network interface the gateway should bind to
         // For multiple gateways, you could run a container with multiple ips, and bind each gateway to one of them
-        localAddress = InetAddress.getByName("0.0.0.0")
+        localAddress = "0.0.0.0"
         // Optional: Define the port the gateway should bind to
         localPort = 13400
 
