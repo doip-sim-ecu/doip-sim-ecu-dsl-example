@@ -1,5 +1,5 @@
 plugins {
-    val kotlinVersion = "1.6.10"
+    val kotlinVersion = "1.7.0"
     kotlin("jvm") version kotlinVersion
     id("com.github.johnrengelman.shadow") version "7.1.0"
     application
@@ -10,14 +10,14 @@ version = "0.1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
-    maven("https://jitpack.io")
+//    maven("https://jitpack.io")
 }
 
 dependencies {
     implementation(kotlin("stdlib"))
 
     // You should use the latest released stable version
-    implementation("com.github.doip-sim-ecu:doip-sim-ecu-dsl:0.9.0")
+    implementation("io.github.doip-sim-ecu:doip-sim-ecu-dsl:0.9.5")
 //    implementation("com.github.doip-sim-ecu:doip-sim-ecu-dsl:main-SNAPSHOT")
 }
 
