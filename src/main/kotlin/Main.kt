@@ -1,5 +1,5 @@
 fun main() {
-    print("Custom Gateway")
+    println("Custom Gateway")
     myCustomGateway(::gateway)
     start()
 }
