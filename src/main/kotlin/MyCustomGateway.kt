@@ -25,23 +25,6 @@ fun myCustomGateway(gateway: CreateGatewayFunc) {
 
         // You can now define how requests for the gateway should be handled
 
-        // Generally speaking there are 2 types of request matching
-        // 1. Exact matches - they are done by binary matching and aren't limited in length
-        //    They are always done when there's no variable content in the "pattern"
-        // 2. Regular expressions - incoming requests are converted into normalized hex-strings (uppercase,
-        //    no whitespaces), which then are matched against a regular expression defined in the request argument.
-        //
-        // If a string (instead of a Regex) is given, it's first converted into a Regex by removing the spaces,
-        // converting it to uppercase and replacing [] with .* to be matched against the normalized request string
-        //
-        // Matching order is always the order in which the requests are defined. This might be changed in the future.
-        //
-        // Since converting all incoming request bytes would be fairly expensive (esp. to simulate flashing),
-        // the amount of converted bytes for matching with regular expressions is limited to the value set by
-        // requestMatchBytes here (default 10).
-        // Note: This means any regular expression containing more bytes than requestRegexMatchBytes will NEVER match
-        requestRegexMatchBytes = 10
-
         // Now, let's see some Exact matches examples:
         // To start off, let's use a simple example, let's acknowledge the presence of a tester
         request("3E 00") { ack() }
@@ -72,7 +55,7 @@ fun myCustomGateway(gateway: CreateGatewayFunc) {
         // So this expression
         request("3e 00 []") { ack() }
         // is semantically the same as
-        request(Regex("3E00.*")) { ack() }
+        request(byteArrayOf(0x3E, 0x0), onlyStartsWith = true) { ack() }
 
         // For more complex matching you'd typically use a Regex-object, but for most cases in practice the string
         // with the [] placeholder work well enough.
@@ -209,7 +192,7 @@ fun myCustomGateway(gateway: CreateGatewayFunc) {
 
         // Either by directly adding them
         ecu("ECU1") {
-            physicalAddress = 0x1111
+            logicalAddress = 0x1111
             functionalAddress = 0xcafe.toShort()
             // Optional - when no request is matched, automatically send out of range nrc (default true)
             nrcOnNoMatch = true
@@ -226,7 +209,7 @@ fun myCustomGateway(gateway: CreateGatewayFunc) {
 
 fun exampleEcu2(ecu: CreateEcuFunc) {
     ecu("EXAMPLEECU2") {
-        physicalAddress = 0x2211
+        logicalAddress = 0x2211
         functionalAddress = 0xcafe.toShort()
 
         request("10 01") { ack() }
