@@ -33,7 +33,7 @@ fun myCustomGateway(gateway: CreateGatewayFunc) {
         // As well as
         request(byteArrayOf(0x3E, 0x00)) { respond(byteArrayOf(0x7E, 0x3E)) }
 
-        // We can also define a name for the request, which might be used in logging in the future
+        // We can also define a name for the request, which is used when the request gets logged
         request("3E 00", "TesterPresent") { ack() }
 
         // It's also possible to send nrc's
@@ -45,20 +45,13 @@ fun myCustomGateway(gateway: CreateGatewayFunc) {
         // As well as
         request(byteArrayOf(0x3E, 0x00)) { respond(byteArrayOf(0x7F, 0x3E, 0x10)) }
 
-        // The matching can also be done with regular expressions, by either using a string which will be
-        // converted into a (hopefully correct) regular expression, or by specifying a Regex
-        // directly
-
-        // The regular expression conversion will replace the characters [] with .*, convert the expression to
-        // uppercase and remove all spaces
+        // The matching can also be done by only defining the start of the request, using [] or .* will set the
+        // onlyStartsWith = true flag
 
         // So this expression
         request("3e 00 []") { ack() }
         // is semantically the same as
         request(byteArrayOf(0x3E, 0x0), onlyStartsWith = true) { ack() }
-
-        // For more complex matching you'd typically use a Regex-object, but for most cases in practice the string
-        // with the [] placeholder work well enough.
 
 
         // At this point you could also programmatically open a csv-file, instead of defining each request,
@@ -111,7 +104,7 @@ fun myCustomGateway(gateway: CreateGatewayFunc) {
 
                 // When true is returned, all request matching is forfeited, and no matching will
                 // be executed. When all interceptors return false, the normal request matching will
-                // commence afterwards
+                // commence afterward
                 true
 
                 // This is also a pretty powerful tool for testing - you could start an interceptor that records all
@@ -146,7 +139,7 @@ fun myCustomGateway(gateway: CreateGatewayFunc) {
         // persistent across different requests (ecu), or within multiple consecutive requests (caller)
         //
         // These storages are reset, when the reset() method is called on the ecu or request
-        @Suppress("UNUSED_CHANGED_VALUE", "UNUSED_VALUE")
+        @Suppress("UNUSED_CHANGED_VALUE")
         request("10 02") {
             var sessionState by ecu.storedProperty { SessionState.DEFAULT } // {} contains the initial value that'll be used when the property is initialized
             if (sessionState != SessionState.PROGRAMMING) {
@@ -164,10 +157,10 @@ fun myCustomGateway(gateway: CreateGatewayFunc) {
             // to reset the storage for the request
 //            caller.reset()
 
+//            ecu.reset()
             // to reset the storage for the ecu (and all its requests)
             // this can be pretty nifty when you want to reset your state after each integration test
             // with a custom write command
-//            ecu.reset()
         }
 
         // You can also respond with a sequence, advancing in the list of responses with each matched request
@@ -189,6 +182,8 @@ fun myCustomGateway(gateway: CreateGatewayFunc) {
         }
 
         // Since usually there are other ECUs behind a gateway, we can define them too
+        // please note, that no vam will be sent for them, unless you specify
+        // the additionalVam property
 
         // Either by directly adding them
         ecu("ECU1") {
