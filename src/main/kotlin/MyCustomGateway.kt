@@ -2,18 +2,11 @@ import library.decodeHex
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
-fun myCustomGateway(gateway: CreateGatewayFunc) {
+fun myCustomGateway(gateway: CreateDoipEntityFunc) {
     gateway("GATEWAY") {
         // The logical address for your gateway
         logicalAddress = 0x1010
         functionalAddress = 0xcafe.toShort()
-
-        // Optional: Define the network interface the gateway should bind to
-        // For multiple gateways, you could run a container with multiple ips, and bind each gateway to one of them
-        localAddress = "0.0.0.0"
-        // Optional: Define the port the gateway should bind to
-        localPort = 13400
-
 
         // VIN - will be padded to the right with 0 until 17 chars are reached, if left empty, 0xFF will be used
         vin = "MYVIN"
